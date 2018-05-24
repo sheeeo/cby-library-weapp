@@ -1,0 +1,24 @@
+/* pages/recent/recent.wxss */
+.book{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 200rpx;
+}
+
+.bookmain{
+  display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: auto;
+}
+
+.bookPic{
+  width:104px; 
+  height: 140px;
+  margin-top: 8px;
+  margin-right: 8px;
+}

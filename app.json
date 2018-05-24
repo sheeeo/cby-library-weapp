@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/recent/recent",
+    "pages/library/library",
+    "pages/aboutMe/aboutMe",
+    "pages/bookDetail/bookDetail",
+    "pages/reading/reading",
+    "pages/chapter/chapter"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#dddddd",
+    "selectedColor": "#3cc51f",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/recent/recent",
+        "iconPath": "images/recent128px.png",
+        "selectedIconPath": "images/recent128px.png",
+        "text": "最近阅读"
+      },
+      {
+        "pagePath": "pages/library/library",
+        "iconPath": "images/library128px.png",
+        "selectedIconPath": "images/library128px.png",
+        "text": "图书馆"
+      },
+      {
+        "pagePath": "pages/aboutMe/aboutMe",
+        "iconPath": "images/me128px.png",
+        "selectedIconPath": "images/me128px.png",
+        "text": "关于我"
+      }
+    ],
+    "position": "bottom"
+  }
+}

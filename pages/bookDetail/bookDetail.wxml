@@ -1,0 +1,20 @@
+<view>
+  <scroll-view class='page'>
+    <image class='bookPic' mode='aspectFill' src="{{bookinfo.bookpic.url}}"></image>
+    <view class="page__hd">
+      <text class="weui-article__h1">{{bookinfo.bookName}}</text>
+      <view class='weui-article__section'>
+        <text class="weui-article__h3">{{bookinfo.author}}</text>
+        <view class="page__bd">
+          <text class="page__title">内容简介</text>
+          <view class="weui-article__p">
+            <text>{{bookinfo.bookinfo}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='navibar'>
+    <navigator wx:for="{{navbar}}" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}" >{{item.name}}</navigator>
+  </view>
+</view>

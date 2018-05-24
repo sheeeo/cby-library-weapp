@@ -1,0 +1,57 @@
+/* pages/library/library.wxss */
+
+.searchbar-result {
+  margin-top: 0;
+  font-size: 14px;
+}
+
+.searchbar-result:before {
+  display: none;
+}
+
+.weui-cell {
+  padding: 12px 15px 12px 35px;
+}
+
+/*每行行内元素按行分布*/
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.bookPic {
+  width: 104px;
+  height: 140px;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.title1 {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+  line-height: 130%;
+}
+
+.title2 {
+  font-size: 14px;
+  color: #333;
+  margin: 10px 0;
+  line-height: 130%;
+}
+
+.title3 {
+  height: 90px;
+  width: 222px;
+  font-size: 14px;
+  color: #999;
+  margin: 8px 0;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
