@@ -31,7 +31,7 @@
 </view>
 <!-- 底部 -->
 <view class="bottom-nav bottom_nav" style="display:{{nav}}">
-  <view class="item menu-button">
+  <view class="item menu-button" bindtap="showChapters">
     <view class="item-warp">
       <view class="icon-menu"></view>
       <view class="icon-text">目录</view>

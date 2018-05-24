@@ -1,18 +1,30 @@
 // pages/chapter/chapter.js
+var Bmob = require('../../utils/bmob.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    that.setData({
+      bookid : options.bookid
+    })
+    var query = new Bmob.Query("chapterinformation");
+    query.equalTo("bookid", bookid);
+    query.find().then(res => {
+      console.log(res);
+      that.setData({
+        chapterinfo_list:res
+      })
+    })
   },
 
   /**

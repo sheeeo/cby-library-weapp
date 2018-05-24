@@ -1,2 +1,2 @@
 <!--pages/chapter/chapter.wxml-->
-<view>{{chapterinfo.chaptername}}</view>
+<view>{{chapterinfo_list.chaptername}}</view>

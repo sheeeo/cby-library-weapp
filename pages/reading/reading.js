@@ -56,9 +56,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //   })
-    // })
-    // 本地提取字号大小
     console.log("onload")
     var that = this;
     that.setData({
@@ -66,6 +63,7 @@ Page({
       bookchapterid: 1
     })
 
+    // 本地提取字号大小
     wx.getStorage({
       key: 'initFontSize',
       success: function (res) {
@@ -190,6 +188,9 @@ Page({
       })
       // 如果是第一页，弹窗提示
       if (!isExist) {
+        this.setData({
+          bookchapterid: this.data.bookchapterid + 1
+        })
         wx.showToast({
           title: '这是第一章',
         })
@@ -219,10 +220,19 @@ Page({
       })
       // 如果有内容，则下一页可用，否则禁用
       if (!isExist) {
+        this.setData({
+          bookchapterid: this.data.bookchapterid - 1
+        })
         wx.showToast({
           title: '没有下一页了',
         })
-      } 
+      }
+    })
+  },
+  //点击进入目录页
+  showChapters: function () {
+    wx.navigateTo({
+      url: '/pages/chapter/chapter?bookid=' + this.data.bookid
     })
   },
   //点击字体出现窗口
