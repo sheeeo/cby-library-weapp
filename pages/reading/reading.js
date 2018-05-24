@@ -170,27 +170,45 @@ Page({
   //上一页
   lastPage: function () {
     var query = new Bmob.Query("chapterinformation");
-    query.equalTo("bookid", this.data.bookid);
-    query.equalTo("bookchapterid", bookchapterid - 1);
     query.find().then(res => {
       console.log(res);
-      that.setData({
-        chapterinfo: res
+      // 页码加一
+      this.setData({
+        bookchapterid: this.data.bookchapterid - 1
       })
+      let isExist = false;
+      res.map((item) => {
+        // 拿到服务器下发数据目标字段
+        let { bookid, bookchapterid } = item.attributes;
+        // 判断该页码是否有内容
+        if (bookid === this.data.bookid && bookchapterid === this.data.bookchapterid) {
+          this.setData({
+            chapterinfo: item.attributes
+          })
+          isExist = true;
+        }
+      })
+      // 如果是第一页，弹窗提示
+      if (!isExist) {
+        wx.showToast({
+          title: '这是第一章',
+        })
+      }
     })
   },
   //下一页
   nextPage: function () {
     var query = new Bmob.Query("chapterinformation");
     query.find().then(res => {
+      console.log(res);
+      // 页码加一
+      this.setData({
+        bookchapterid: this.data.bookchapterid + 1
+      })
       let isExist = false;
       res.map((item) => {
         // 拿到服务器下发数据目标字段
         let { bookid, bookchapterid } = item.attributes;
-        // 页码加一
-        this.setData({
-          bookchapterid: this.data.bookchapterid + 1
-        })
         // 判断该页码是否有内容
         if (bookid === this.data.bookid && bookchapterid === this.data.bookchapterid) {
           this.setData({
@@ -200,15 +218,11 @@ Page({
         }
       })
       // 如果有内容，则下一页可用，否则禁用
-      if (isExist) {
-        this.setData({
-          nextPageDisabled: true
+      if (!isExist) {
+        wx.showToast({
+          title: '没有下一页了',
         })
-      } else {
-        this.setData({
-          nextPageDisabled: false
-        })
-      }
+      } 
     })
   },
   //点击字体出现窗口
