@@ -57,9 +57,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    let destChapter = options.bookchapterid ? parseInt(options.bookchapterid + "") : 1
+    console.log(destChapter)
     that.setData({
       bookid: options.bookid,
-      bookchapterid: 1
+      bookchapterid: destChapter
     })
     // 本地提取字号大小
     wx.getStorage({
@@ -103,17 +105,15 @@ Page({
     // 向Bmob请求reading页数据
     //创建查询对象，入口参数是对象类的实例
     var query = new Bmob.Query("chapterinformation");
+    query.equalTo("bookid", this.data.bookid);
+    query.equalTo("bookchapterid", this.data.bookchapterid);
     query.find().then(res => {
-      console.log(res);
-      res.map((item) => {
-        const { bookid, bookchapterid } = item.attributes;
-        if (bookid === this.data.bookid && bookchapterid === this.data.bookchapterid) {
-          that.setData({
-            chapterinfo: item.attributes
-          })
-        }
-      })
-    })
+      if (res.length > 0) {
+        that.setData({
+          chapterinfo: res[0]
+        })
+      }
+    });
   },
   //事件处理函数
   //字体变大
@@ -126,7 +126,6 @@ Page({
     that.setData({
       initFontSize: FontSize += 1
     })
-    // console.log(that.data.initFontSize)
     wx.setStorage({
       key: "initFontSize",
       data: that.data.initFontSize
@@ -142,7 +141,6 @@ Page({
     that.setData({
       initFontSize: FontSize -= 1
     })
-    // console.log(that.data.initFontSize)
     wx.setStorage({
       key: "initFontSize",
       data: that.data.initFontSize
@@ -166,66 +164,52 @@ Page({
   //上一页
   lastPage: function () {
     var query = new Bmob.Query("chapterinformation");
+    var that = this;
+    this.setData({
+      bookchapterid: this.data.bookchapterid - 1
+    })
+    query.equalTo("bookid", this.data.bookid);
+    query.equalTo("bookchapterid", this.data.bookchapterid);
     query.find().then(res => {
-      console.log(res);
-      // 页码加一
-      this.setData({
-        bookchapterid: this.data.bookchapterid - 1
-      })
-      let isExist = false;
-      res.map((item) => {
-        // 拿到服务器下发数据目标字段
-        let { bookid, bookchapterid } = item.attributes;
-        // 判断该页码是否有内容
-        if (bookid === this.data.bookid && bookchapterid === this.data.bookchapterid) {
-          this.setData({
-            chapterinfo: item.attributes
-          })
-          isExist = true;
-        }
-      })
-      // 如果是第一页，弹窗提示
-      if (!isExist) {
-        this.setData({
-          bookchapterid: this.data.bookchapterid + 1
+      if(res.length>0){
+        that.setData({
+          chapterinfo: res[0]
+        })
+      }else{
+        that.setData({
+          bookchapterid: that.data.bookchapterid + 1
         })
         wx.showToast({
           title: '这是第一章',
+          icon: 'none'
         })
       }
-    })
+    });
   },
   //下一页
   nextPage: function () {
     var query = new Bmob.Query("chapterinformation");
+    var that = this;
+    this.setData({
+      bookchapterid: this.data.bookchapterid + 1
+    })
+    query.equalTo("bookid", this.data.bookid);
+    query.equalTo("bookchapterid", this.data.bookchapterid);
     query.find().then(res => {
-      console.log(res);
-      // 页码加一
-      this.setData({
-        bookchapterid: this.data.bookchapterid + 1
-      })
-      let isExist = false;
-      res.map((item) => {
-        // 拿到服务器下发数据目标字段
-        let { bookid, bookchapterid } = item.attributes;
-        // 判断该页码是否有内容
-        if (bookid === this.data.bookid && bookchapterid === this.data.bookchapterid) {
-          this.setData({
-            chapterinfo: item.attributes
-          })
-          isExist = true;
-        }
-      })
-      // 如果有内容，则下一页可用，否则禁用
-      if (!isExist) {
-        this.setData({
-          bookchapterid: this.data.bookchapterid - 1
+      if (res.length > 0) {
+        that.setData({
+          chapterinfo: res[0]
+        })
+      } else {
+        that.setData({
+          bookchapterid: that.data.bookchapterid - 1
         })
         wx.showToast({
-          title: '没有下一页了',
+          title: '没有更多了',
+          icon: 'none'
         })
       }
-    })
+    });
   },
   //点击进入目录页
   showChapters: function () {

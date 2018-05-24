@@ -21,7 +21,6 @@ Page({
     // 按照bookchapterid升序排列
     query.ascending('bookchapterid');
     query.find().then(res => {
-      console.log(res);
       that.setData({
         chapterinfo_list: res
       })
