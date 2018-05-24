@@ -56,13 +56,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("onload")
     var that = this;
     that.setData({
       bookid: options.bookid,
       bookchapterid: 1
     })
-
     // 本地提取字号大小
     wx.getStorage({
       key: 'initFontSize',

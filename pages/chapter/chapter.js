@@ -23,14 +23,14 @@ Page({
     query.find().then(res => {
       console.log(res);
       that.setData({
-        chapterinfo_list:res
+        chapterinfo_list: res
       })
     })
   },
   showChapterContent:function(e){
     // 跳转回阅读器
     wx.navigateTo({
-      url: '/pages/reading/reading?id =' + e.currentTarget.dataset.id + '&bookchapterid = ' + e.currentTarget.dataset.bookchapterid
+      url: '/pages/reading/reading?bookid=' + e.currentTarget.dataset.chapter.bookid + '&bookchapterid=' + e.currentTarget.dataset.chapter.bookchapterid
     })
   },
 
