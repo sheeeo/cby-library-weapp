@@ -1,2 +1,2 @@
 <!--pages/chapter/chapter.wxml-->
-<view>{{chapterinfo_list.chaptername}}</view>
+<view class='chapter_item' wx:for="{{chapterinfo_list}}" bindtap='showChapterContent' data-index='index'>{{item.chaptername}}</view>

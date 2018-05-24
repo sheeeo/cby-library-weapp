@@ -5,8 +5,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    
+  data: {  
   },
 
   /**
@@ -18,7 +17,9 @@ Page({
       bookid : options.bookid
     })
     var query = new Bmob.Query("chapterinformation");
-    query.equalTo("bookid", bookid);
+    query.equalTo("bookid", this.data.bookid);
+    // 按照bookchapterid升序排列
+    query.ascending('bookchapterid');
     query.find().then(res => {
       console.log(res);
       that.setData({
@@ -26,6 +27,13 @@ Page({
       })
     })
   },
+  showChapterContent:function(e){
+    // 跳转回阅读器
+    wx.navigateTo({
+      url: '/pages/reading/reading?id =' + e.currentTarget.dataset.id + '&bookchapterid = ' + e.currentTarget.dataset.bookchapterid
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
