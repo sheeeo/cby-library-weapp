@@ -26,6 +26,17 @@ Page({
       inputVal: e.detail.value
     });
   },
+  search:function(){
+  var query = new Bmob.Query("bookinformation");
+  query.equalTo("bookName",this.data.inputVal);
+  query.find().then(res=>{
+    console.log(res);
+    console.log(res[0].id);
+    wx.navigateTo({
+      url: '../bookDetail/bookDetail?objectId='+res[0].id,
+    })
+  })
+  },
   onLoad:function(){
     that = this;
     var bookinfo = Bmob.Object.extend("bookinformation ");

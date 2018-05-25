@@ -40,7 +40,9 @@ Page({
           /*bookinfo: bookinfo*/
           bookinfo:result,
           navbar: [
-            { name: '收藏' },
+            { name: '收藏',
+            
+             },
             {
               name: "阅读",
               url: "/pages/reading/reading?bookid=" + bookid
