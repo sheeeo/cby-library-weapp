@@ -107,7 +107,11 @@ Page({
     var query = new Bmob.Query("chapterinformation");
     query.equalTo("bookid", this.data.bookid);
     query.equalTo("bookchapterid", this.data.bookchapterid);
+    wx.showLoading({
+      title: '载入中',
+    })
     query.find().then(res => {
+      wx.hideLoading();
       if (res.length > 0) {
         that.setData({
           chapterinfo: res[0]

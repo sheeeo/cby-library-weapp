@@ -15,6 +15,9 @@
     </view>
   </scroll-view>
   <view class='navibar'>
-    <navigator wx:for="{{navbar}}" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}" >{{item.name}}</navigator>
+    <!-- <navigator wx:for="{{navbar}}" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}" >{{item.name}}</navigator> -->
+        <!-- <navigator url="{{"/pages/reading/reading?bookid=" + bookid}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}" >阅读</navigator> -->
+        <view bindtap='handleFavor' class="function-text"><text>收藏</text></view>
+        <view bindtap='handleReading' class="function-text"><text>阅读</text></view>
   </view>
 </view>

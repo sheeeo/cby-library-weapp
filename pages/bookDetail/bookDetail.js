@@ -16,6 +16,14 @@ Page({
       isChecked: true
     })
   },
+  handleReading: function(){
+    wx.navigateTo({
+      url: "/pages/reading/reading?bookid=" + this.data.bookid
+    })
+  },
+  handleFavor: function(){
+    console.log('Favorated!')
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -29,27 +37,27 @@ Page({
     //创建查询对象，入口参数是对象类的实例
     var query = new Bmob.Query(bookinfo);
     //查询单条数据，第一个参数是这条数据的objectId值
+    wx.showLoading({
+      title: '载入中',
+    })
     query.get(objectId, {
       success: function (result) {
         //console.log(result)
         // 查询成功，调用get方法获取对应属性的值
+        wx.hideLoading()
         var bookid = result.get("bookid")
-        console.log("bookid="+bookid)
-       
         that.setData({
-          /*bookinfo: bookinfo*/
-          bookinfo:result,
-          navbar: [
-            { name: '收藏',
-            
-             },
-            {
-              name: "阅读",
-              url: "/pages/reading/reading?bookid=" + bookid
-            }],
+          bookinfo: result,
+          bookid
         })
       },
-      fail: function (object, error) { }
+      fail: function (object, error) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '载入失败',
+          icon: 'none'
+        })
+      }
     })
   },
   
