@@ -31,16 +31,3 @@
   color: #fff;
   line-height: 32px;
 }
-checkview{
-  padding-left: 200px;
-}
-.service_selection .is_checked{
-  border: 1px solid #FE0002 ;
-  color: #FE0002 ;
-  background: #fff;
-}
-.service_selection .normal{
-  border: none;
-  color: #333;
-  background: #F0F1EC;
-}    

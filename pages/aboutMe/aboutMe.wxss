@@ -14,3 +14,7 @@
   color: #aaa;
   margin: 20rpx;
 }
+.book_flex{
+  display: flex;
+  
+}
