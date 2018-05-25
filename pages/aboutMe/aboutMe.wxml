@@ -7,10 +7,10 @@
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
       </block>
     </view>
-  </view>
-  <view class='body'>
-    <view class='book_flex'>
-      <view class='page__title'>收藏的图书</view>
+    <view class='body'>
+      <view class='book_flex'>
+        <view class='page__title'>收藏的图书</view>
+      </view>
     </view>
   </view>
 </view>

@@ -16,5 +16,12 @@
 }
 .book_flex{
   display: flex;
-  
+  flex: 1;
+}
+.body{
+  flex: 1;
+  width: 100%;
+}
+.container{
+  flex: 1
 }
