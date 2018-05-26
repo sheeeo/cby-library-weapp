@@ -25,6 +25,16 @@ Page({
         }
       })
     }
+    //收藏图书
+    var query = new Bmob.Query("userFavorated");
+    query.equalTo("openId",wx.getStorageSync('openid'))
+    query.find().then(res => {
+      console.log(res)
+      this.setData({
+        bookid:res.item.bookid
+      })
+    })
+    console.log('bookid'+this.data.bookid)
   },
   getUserInfo: function (e) {
     console.log("e",e)

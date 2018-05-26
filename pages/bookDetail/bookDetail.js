@@ -1,28 +1,14 @@
 var Bmob = require('../../utils/bmob.js');
 var that;
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    navbar: [],
-    currentTab: 0,//三个文件这里依次为0，1，2，其他地方一样
-    //isChecked: false,
-    bookinfo: ''
-  },
-  serviceSelection() {
-    this.setData({
-      isChecked: true
-    })
-  },
-  handleReading: function(){
-    wx.navigateTo({
-      url: "/pages/reading/reading?bookid=" + this.data.bookid
-    })
-  },
-  handleFavor: function(){
-    console.log('Favorated!')
+    favor: '收藏',
+    isFavored: '',
+    bookinfo: '',
+    bookid:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -42,13 +28,13 @@ Page({
     })
     query.get(objectId, {
       success: function (result) {
-        //console.log(result)
         // 查询成功，调用get方法获取对应属性的值
         wx.hideLoading()
         var bookid = result.get("bookid")
         that.setData({
           bookinfo: result,
-          bookid
+          bookid: bookid
+         
         })
       },
       fail: function (object, error) {
@@ -59,54 +45,81 @@ Page({
         })
       }
     })
-  },
-  
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+    //判断是否被收藏
+   
+    var openid = wx.getStorageSync("openid")
+    var query = new Bmob.Query("userFavorated");
+    query.equalTo("openId", openid);
+    query.equalTo("bookid", that.data.bookid);
+    query.find().then(res => {
+      if (res.length > 0) {
+        that.setData({
+          favor: '已收藏',
+          isFavored: true
+        })
+      } else {
+        that.setData({
+          favor: '收藏',
+          isFavored: false
+        })
+      }
+    })
+  }, 
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  handleReading: function () {
+    wx.navigateTo({
+      url: "/pages/reading/reading?bookid=" + this.data.bookid
+    })
+    // var bookArray=[]
+    // wx.setStorage({
+    //   key: 'bookid',
+    //   data: this.data.bookid,
+    // })
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  handleFavor: function () {
+    var that = this;
+    if (this.data.isFavored === false) {
+      var Favor = Bmob.Object.extend("userFavorated");
+      var favor = new Favor();
+      favor.save({
+        openId: wx.getStorageSync("openid"),
+        bookid: that.data.bookid
+      }, {
+          success: function (result) {
+            //添加成功
+            console.log('success' + result)
+            that.setData({
+              favor: '已收藏',
+              isFavored: true
+            })
+            wx.showToast({
+              title: '已收藏',
+            })
+          },
+          error: function (result, error) {
+            //添加失败
+            console.log('error' + result)
+          }
+        })
+    } else {
+      var userFavorated = new Bmob.Object.extend("userFavorated")
+      var query = new Bmob.Query(userFavorated);
+      query.equalTo("openId", wx.getStorageSync('openid'));
+      query.equalTo("bookid", this.data.bookid);
+      query.find().then(function (todos) {
+        return Bmob.Object.destroyAll(todos);
+      }).then(function (todos) {
+        console.log(todos);
+        that.setData({
+          favor: '收藏',
+          isFavored: false
+        })
+        wx.showToast({
+          title: '取消收藏'
+        })
+      }, function (error) {
+      })
+    }
   }
 });

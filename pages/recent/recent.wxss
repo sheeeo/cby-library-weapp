@@ -1,5 +1,26 @@
 /* pages/recent/recent.wxss */
-.book{
+.body{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.con{
+ 
+  display: flex;
+  flex-direction: column;
+}
+.pic{
+  width: 30%;
+  height: 160px;
+}
+.name{
+ width: 30%;
+ text-align: center;
+}
+/* .book{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,4 +42,4 @@
   height: 140px;
   margin-top: 8px;
   margin-right: 8px;
-}
+} */

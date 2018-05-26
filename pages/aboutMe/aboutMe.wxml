@@ -11,6 +11,14 @@
       <view class='book_flex'>
         <view class='page__title'>收藏的图书</view>
       </view>
+      <view class='books'>
+        <view class='con'>
+          <view class='pic'>
+            <image mode='scaleToFill' src='{{}}'></image>
+          </view>
+          <view class='name'>{{item.bookname}}</view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

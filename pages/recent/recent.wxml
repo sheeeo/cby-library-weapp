@@ -1,24 +1,6 @@
-<scroll-view class='bookmain'>
-<view class='book'>
-<image class='bookPic' mode='scaleToFill' src='../../images/dllszj.jpg'></image>
-<text class='bookName'>杜拉拉升职记</text>
+<view class='body' wx:for="{{bookinfo_list}}">
+<view class='con'>
+<view class='pic'><image mode='scaleToFill' src="{{item.bookpic.url}}"></image></view>
+ <view class='name'>{{item.bookname}}</view> 
+ </view>
 </view>
-<view class='book'>
-<image class='bookPic' mode='scaleToFill' src='../../images/dhw.jpg'></image>
-<text class='bookName'>大河湾</text>
-</view>
-<view class='book'>
-<image class='bookPic' mode='scaleToFill' src='../../images/bngd.jpg'></image>
-<text class='bookName'>百年孤独</text>
-</view>
-
-
-<view class='book'>
-<image class='bookPic' mode='scaleToFill' src='../../images/amypj.jpg'></image>
-<text class='bookName'>傲慢与偏见</text>
-<image class='bookPic' mode='scaleToFill' src='../../images/szbf.png'></image>
-<text class='bookName'>孙子兵法</text>
-<image class='bookPic' mode='scaleToFill' src='../../images/gwgz.jpg'></image>
-<text class='bookName'>古文观止</text>
-</view>
-</scroll-view>

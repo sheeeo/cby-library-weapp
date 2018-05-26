@@ -287,62 +287,6 @@ Page({
       data: this.data.daynight
     })
   },
-  //滚动隐藏窗口
-  /*scrollContain:function(){
-    this.setData({
-      nav: 'none',
-      ziti: 'none',
-      zj:'none'
-    })
-  },*/
-  //滚动到底部
-  /*bindscrolltolower:function(){
-    this.setData({
-      zj: 'block',
-    })
-  },*/
-  // 触摸开始事件 
-  /*touchStart: function (e) {
-    touchDot = e.touches[0].pageX; // 获取触摸时的原点 
-    // 使用js计时器记录时间  
-    interval = setInterval(function () {
-      time++;
-    }, 100);
-  },*/
-  // 触摸移动事件 
-  /*touchMove: function (e) {
-    var touchMove = e.touches[0].pageX;
-    // console.log("touchMove:" + touchMove + " touchDot:" + touchDot + " diff:" + (touchMove - touchDot));
-    // 向左滑动  
-    if (touchMove - touchDot <= -40 && time < 10) {
-      // wx.switchTab({
-      //   url: '../左滑页面/左滑页面'
-      // });
-      // console.log("left")
-      var bookinfo = Bmob.Object.extend("bookinformation ");
-      var query = new Bmob.Query(bookinfo);
-      this.setData({
-        Text: '',
-        scroll_top: 0
-      })
-    }
-    // 向右滑动 
-    if (touchMove - touchDot >= 40 && time < 10) {
-      // console.log('right');
-      // wx.switchTab({
-      //   url: '../右滑页面/右滑页面'
-      // });
-      this.setData({
-        Text: '',
-        scroll_top: 0
-      })
-    }
-  },*/
-  // 触摸结束事件 
-  /*touchEnd: function (e) {
-    clearInterval(interval); // 清除setInterval 
-    time = 0;
-  },*/
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
