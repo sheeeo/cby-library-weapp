@@ -25,14 +25,12 @@ Page({
           query.first({
             success: function (result) {
               bookarray.push(result)
+              that.setData({
+                bookinfo: bookarray
+              })
             }
           })
         })
-        that.setData({
-          bookinfo: bookarray
-        })
-
-        console.log(bookarray)
       },
       fail: function (res) { },
       complete: function (res) { },
