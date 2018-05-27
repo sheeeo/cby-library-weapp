@@ -1,20 +1,46 @@
+var Bmob = require('../../utils/bmob.js');
 const app = getApp()
 
 Page({
-  data: { 
+  data: {
+    recent: [],
+    bookinfo:[]
+  },
+  onLoad: function () { },//监听加载
+  onShow: function () {
+    var that = this;
     
-   },
-  onLoad: function () { 
-    
-  },//监听加载
-  onReady: function () { },//监听初次渲染完成
-  onShow: function () { },//监听显示
-  onHide: function () { },//监听隐藏
-  onUnload: function () { },//监听卸载
-  onPullDownRefresh: function () { },//监听下拉
-  onReachBottom: function () { },//监听上拉触底
-  onShareAppMessage: function () { },//监听右上角分享
-  //如下为自定义的事件处理函数（视图中绑定的）
-  viewTap: function () {//setData设置data值，同时将更新视图
-    this.setData({ text: 'Set some data for updating view.' })
-  }})
+    wx.getStorage({
+      key: 'recent',
+      success: function (res) {
+        that.setData({
+          recent: res
+        })
+        console.log('recent=', that.data.recent)
+        let bookarray = [];
+        res.data.map((item) => {
+          var bookInfo = Bmob.Object.extend("bookinformation")
+          var query = new Bmob.Query(bookInfo);
+          query.equalTo('bookid', item);
+          query.first({
+            success: function (result) {
+              bookarray.push(result)
+            }
+          })
+        })
+        that.setData({
+          bookinfo: bookarray
+        })
+
+        console.log(bookarray)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },//监听显示
+  showbookDetail: function () {
+    wx.navigateTo({
+      url: '../bookDetail/bookDetail?bookid=' + this.data.bookid,
+    })
+  }
+})

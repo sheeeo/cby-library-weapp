@@ -39,7 +39,7 @@ Page({
         icon: 'none'
       })
     }).then(bookid => {
-      console.log(bookid)
+      //console.log(bookid)
       var openid = wx.getStorageSync("openid")
       var query = new Bmob.Query("userFavorated");
       query.equalTo("openId", openid);
@@ -66,8 +66,10 @@ Page({
       key: 'recent',
       success: function(res) {
         let recentList = [];
+        //res遍历
         res.data.map((item,idx) => {
           if (item === that.data.bookid){
+            //slice截取数组,将bookid重复部分截掉，并再写入storage
             recentList = res.data.slice(0, idx).concat(res.data.slice(idx + 1))
             wx.setStorageSync('recent', recentList)
           }

@@ -30,8 +30,8 @@ Page({
   var query = new Bmob.Query("bookinformation");
   query.equalTo("bookName",this.data.inputVal);
   query.find().then(res=>{
-    console.log(res);
-    console.log(res[0].id);
+    //console.log(res);
+    //console.log(res[0].id);
     wx.navigateTo({
       url: '../bookDetail/bookDetail?objectId='+res[0].id,
     })
@@ -62,7 +62,7 @@ Page({
     var index = e.currentTarget.dataset.index;
     // 取出objectId
     var objectId = that.data.bookinfo_list[index].id;
-    console.log("objectId="+objectId)
+    //console.log("objectId="+objectId)
     // 跳转到详情页
     wx.navigateTo({
       url: '../bookDetail/bookDetail?objectId=' + objectId

@@ -1,5 +1,6 @@
 /* pages/recent/recent.wxss */
-.body{
+
+.body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -7,19 +8,22 @@
   padding-left: 10px;
   padding-right: 10px;
 }
-.con{
- 
+
+.con {
+  width: 30%;
   display: flex;
   flex-direction: column;
 }
-.pic{
-  width: 30%;
+
+.pic {
   height: 160px;
 }
-.name{
- width: 30%;
- text-align: center;
+
+.name {
+  width: 30%;
+  text-align: center;
 }
+
 /* .book{
     display: flex;
     flex-direction: column;
