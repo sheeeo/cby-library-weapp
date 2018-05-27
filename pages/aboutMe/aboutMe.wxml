@@ -9,14 +9,14 @@
     </view>
     <view class='body'>
       <view class='book_flex'>
-        <view class='page__title'>收藏的图书</view>
+        <view class='page__title' >收藏的图书</view>
       </view>
       <view class='books'>
-        <view class='con'>
+        <view class='con' wx:for="{{bookinfo}}" bindtap='showbookDetail' data-index="{{index}}">
           <view class='pic'>
-            <image mode='scaleToFill' src='{{}}'></image>
+            <image mode='scaleToFill' src="{{item.bookpic.url}}"></image>
           </view>
-          <view class='name'>{{item.bookname}}</view>
+          <view class='name'>{{item.bookName}}</view>
         </view>
       </view>
     </view>

@@ -26,6 +26,7 @@
   height: 140px;
   margin-top: 8px;
   margin-right: 8px;
+  border-radius: 3%;
 }
 
 .title1 {

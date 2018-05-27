@@ -1,6 +1,8 @@
-<view class='body' wx:for="{{recent}}" >
-<view class='con' bindtap='showbookDetail'>
-<view class='pic'><image mode='scaleToFill' src="{{item.bookpic.url}}"></image></view>
- <view class='name'>{{item.bookname}}</view> 
- </view>
+<view class='body'>
+  <view class='con' wx:for="{{bookinfo}}" bindtap='showbookDetail' data-index="{{index}}">
+    <view class='pic'>
+      <image mode='scaleToFill' src="{{item.bookpic.url}}"></image>
+    </view>
+    <view class='name'>{{item.bookName}}</view>
+  </view>
 </view>
