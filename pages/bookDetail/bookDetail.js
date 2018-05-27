@@ -61,14 +61,31 @@ Page({
   },
 
   handleReading: function () {
+    let that = this;
+    wx.getStorage({
+      key: 'recent',
+      success: function(res) {
+        let recentList = [];
+        res.map((item,idx) => {
+          if (item === that.data.bookid)
+          recentList = res.slice(0,idx).concat(res.slice(idx + 1))
+          wx.setStorageSync('recent', recentList)
+          return;
+        })
+      },
+      fail: function(err){
+        wx.setStorage({
+          key: 'recent',
+          data: [],
+        })
+      },
+      complete: function(){
+        wx.setStorageSync('recent', wx.getStorageSync('recent').push(that.data.bookid))
+      }
+    })
     wx.navigateTo({
       url: "/pages/reading/reading?bookid=" + this.data.bookid
     })
-    // var bookArray=[]
-    // wx.setStorage({
-    //   key: 'bookid',
-    //   data: this.data.bookid,
-    // })
   },
 
   handleFavor: function () {
