@@ -66,21 +66,21 @@ Page({
       key: 'recent',
       success: function(res) {
         let recentList = [];
-        res.map((item,idx) => {
-          if (item === that.data.bookid)
-          recentList = res.slice(0,idx).concat(res.slice(idx + 1))
-          wx.setStorageSync('recent', recentList)
+        res.data.map((item,idx) => {
+          if (item === that.data.bookid){
+            recentList = res.data.slice(0, idx).concat(res.data.slice(idx + 1))
+            wx.setStorageSync('recent', recentList)
+          }
           return;
         })
       },
       fail: function(err){
-        wx.setStorage({
-          key: 'recent',
-          data: [],
-        })
+        wx.setStorageSync('recent',[]);
       },
       complete: function(){
-        wx.setStorageSync('recent', wx.getStorageSync('recent').push(that.data.bookid))
+        let recentList = wx.getStorageSync('recent');
+        recentList.push(that.data.bookid)
+        wx.setStorageSync('recent', recentList)
       }
     })
     wx.navigateTo({
