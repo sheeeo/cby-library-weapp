@@ -1,5 +1,4 @@
 var Bmob = require('../../utils/bmob.js');
-var that;
 Page({
   /**
    * 页面的初始数据
@@ -8,16 +7,15 @@ Page({
     favor: '收藏',
     isFavored: '',
     bookinfo: '',
-    bookid:''
+    bookid: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    that = this;
+    var that = this;
     // 获取传参
     var objectId = options.objectId;
-    console.log("bookDetail:objectId=" + objectId)
     // 向Bmob请求详情页数据
     var bookinfo = Bmob.Object.extend("bookinformation");
     //创建查询对象，入口参数是对象类的实例
@@ -26,45 +24,41 @@ Page({
     wx.showLoading({
       title: '载入中',
     })
-    query.get(objectId, {
-      success: function (result) {
-        // 查询成功，调用get方法获取对应属性的值
-        wx.hideLoading()
-        var bookid = result.get("bookid")
-        that.setData({
-          bookinfo: result,
-          bookid: bookid
-         
-        })
-      },
-      fail: function (object, error) {
-        wx.hideLoading();
-        wx.showToast({
-          title: '载入失败',
-          icon: 'none'
-        })
-      }
+    query.get(objectId).then(res => {
+      wx.hideLoading()
+      var bookid = res.get("bookid")
+      that.setData({
+        bookinfo: res,
+        bookid: bookid
+      })
+      return bookid;
+    }, err => {
+      wx.hideLoading();
+      wx.showToast({
+        title: '载入失败',
+        icon: 'none'
+      })
+    }).then(bookid => {
+      console.log(bookid)
+      var openid = wx.getStorageSync("openid")
+      var query = new Bmob.Query("userFavorated");
+      query.equalTo("openId", openid);
+      query.equalTo("bookid", bookid);
+      query.find().then(res => {
+        if (res.length > 0) {
+          that.setData({
+            favor: '已收藏',
+            isFavored: true
+          })
+        } else {
+          that.setData({
+            favor: '收藏',
+            isFavored: false
+          })
+        }
+      })
     })
-    //判断是否被收藏
-   
-    var openid = wx.getStorageSync("openid")
-    var query = new Bmob.Query("userFavorated");
-    query.equalTo("openId", openid);
-    query.equalTo("bookid", that.data.bookid);
-    query.find().then(res => {
-      if (res.length > 0) {
-        that.setData({
-          favor: '已收藏',
-          isFavored: true
-        })
-      } else {
-        that.setData({
-          favor: '收藏',
-          isFavored: false
-        })
-      }
-    })
-  }, 
+  },
 
   handleReading: function () {
     wx.navigateTo({
